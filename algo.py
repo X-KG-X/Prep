@@ -19,16 +19,31 @@
 
 # print(rreverse("Hello"))
 
-def selectionSort(listGiven):
-    holder=0
-    for i in range(0,len(listGiven)-1):
-        for j in range(i+1,len(listGiven)):
-            if listGiven[i]>listGiven[j] and listGiven[holder]>listGiven[j]:
-                holder=j
-        listGiven[i], listGiven[holder]=listGiven[holder],listGiven[i]
-    return listGiven
+# def selectionSort(listGiven):
+#     holder=0
+#     for i in range(0,len(listGiven)-1):
+#         for j in range(i+1,len(listGiven)):
+#             if listGiven[i]>listGiven[j] and listGiven[holder]>listGiven[j]:
+#                 holder=j
+#         listGiven[i], listGiven[holder]=listGiven[holder],listGiven[i]
+#     return listGiven
+    
+# x=[5,3,2,6,0,7,2]
+
+# print(selectionSort(x))
+#O(n^2)
+
+
     
 x=[5,3,2,6,0,7,2]
+def insertionSort(x):
+    for i in range(1,len(x)):
+        k=i
+        for j in range(i-1,-1,-1):
+            if x[k]<x[j]:
+                print(k,j)
+                x[k],x[j]=x[j],x[k]
+                k=j
+                print(x)
 
-print(selectionSort(x))
-        
+print(insertionSort(x))
