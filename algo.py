@@ -179,33 +179,135 @@
 # print(obj.deQueue())
 
 
-from queue import *
+# from queue import *
 
-class MovingAverage:
+# class MovingAverage:
 
-    def __init__(self, size: int):
-        """
-        Initialize your data structure here.
-        """
-        self.myQ=Queue(maxsize=size)
-        self.sum=0
-        self.maxSize=size
-        self.curSize=0
+#     def __init__(self, size: int):
+#         """
+#         Initialize your data structure here.
+#         """
+#         self.myQ=Queue(maxsize=size)
+#         self.sum=0
+#         self.maxSize=size
+#         self.curSize=0
 
-    def next(self, val: int) -> float:
-        if self.myQ.full():
-            self.sum-=self.myQ.get()
-            self.sum+=val
-            self.curSize=self.maxSize
-            self.myQ.put(val)
-            return self.sum/self.curSize
-        self.sum+=val
-        self.curSize+=1
-        self.myQ.put(val)
-        return self.sum/self.curSize
-x= MovingAverage(3)
-z=Queue(maxsize=2)
-print(x.next(1))
-print(x.next(10))
-print(x.next(3))
-print(x.next(5))
+#     def next(self, val: int) -> float:
+#         if self.myQ.full():
+#             self.sum-=self.myQ.get()
+#             self.sum+=val
+#             self.curSize=self.maxSize
+#             self.myQ.put(val)
+#             return self.sum/self.curSize
+#         self.sum+=val
+#         self.curSize+=1
+#         self.myQ.put(val)
+#         return self.sum/self.curSize
+# x= MovingAverage(3)
+# z=Queue(maxsize=2)
+# print(x.next(1))
+# print(x.next(10))
+# print(x.next(3))
+# print(x.next(5))
+
+# ************* Data Structure *******
+
+
+# Singly Linked list
+
+class Node:
+    def __init__(self, value):
+        self.value= value
+        self.next= None
+
+class SLL:
+    def __init__(self):
+        self.head=None
+
+    def printValues(self):
+        runner=self.head
+        while (runner !=None):
+            print(runner.value)
+            runner=runner.next
+        return self
+
+    def addBack(self, value):
+        newNode=Node(value)
+        if self.head == None:
+            self.head=newNode
+            return self
+        runner= self.head
+        while (runner.next != None):
+            runner=runner.next
+        runner.next=newNode
+        return self
+    
+    def addFront(self, value):
+        newNode=Node(value)
+        curHead=self.head
+        newNode.next=curHead
+        self.head=newNode
+        return self
+    
+    def removeBack(self):
+        if self.head==None:
+            return self
+        runner=self.head
+        while (runner.next.next != None):
+            runner=runner.next
+        runner.next=None
+        return self
+    
+    def removeFront(self):
+        if self.head == None:
+            return self
+        self.head=self.head.next
+        return self
+
+    def removeVal(self, val):
+        if self.head==None:
+            return self
+        if self.head.value==val:
+            self.head=self.head.next
+            return self
+        runner=self.head
+        while (runner.next !=None):
+            if runner.next.value==val:
+                runner.next=runner.next.next
+                return self
+            runner=runner.next
+        return self
+
+    def insertVal(self, val, n):
+        if self.head ==None:
+            return self
+        newNode= Node(val)
+        runner=self.head
+        counter=0
+        if n==0:
+            newNode.next=runner
+            self.head=newNode
+            return self
+        while (runner.next!=None):
+            counter+=1
+            if counter==n:
+                newNode.next=runner.next
+                runner.next=newNode
+                return self
+            elif counter+1==n:
+                self.addBack(val)
+                return self
+            runner=runner.next
+        return self
+
+        
+
+my_list = SLL()	# create a new instance of a list
+# my_list.printValues().removeBack().printValues()
+my_list.addBack(0).addBack(1).addBack(2).addBack(3).printValues().insertVal(100,4).printValues()
+# chaining, yeah!
+# output should be:
+# Linked lists
+# are
+# fun!
+
