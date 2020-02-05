@@ -215,24 +215,153 @@
 
 # Singly Linked list
 
-class Node:
-    def __init__(self, value):
-        self.value= value
-        self.next= None
+# class Node:
+#     def __init__(self, value):
+#         self.value= value
+#         self.next= None
 
-class SLL:
+# class SLL:
+#     def __init__(self):
+#         self.head=None
+
+#     def printValues(self):
+#         runner=self.head
+#         while (runner !=None):
+#             print(runner.value)
+#             runner=runner.next
+#         return self
+
+#     def addBack(self, value):
+#         newNode=Node(value)
+#         if self.head == None:
+#             self.head=newNode
+#             return self
+#         runner= self.head
+#         while (runner.next != None):
+#             runner=runner.next
+#         runner.next=newNode
+#         return self
+    
+#     def addFront(self, value):
+#         newNode=Node(value)
+#         curHead=self.head
+#         newNode.next=curHead
+#         self.head=newNode
+#         return self
+    
+#     def removeBack(self):
+#         if self.head==None:
+#             return self
+#         runner=self.head
+#         while (runner.next.next != None):
+#             runner=runner.next
+#         runner.next=None
+#         return self
+    
+#     def removeFront(self):
+#         if self.head == None:
+#             return self
+#         self.head=self.head.next
+#         return self
+
+#     def removeVal(self, val):
+#         if self.head==None:
+#             return self
+#         if self.head.value==val:
+#             self.head=self.head.next
+#             return self
+#         runner=self.head
+#         while (runner.next !=None):
+#             if runner.next.value==val:
+#                 runner.next=runner.next.next
+#                 return self
+#             runner=runner.next
+#         return self
+
+#     def insertVal(self, val, n):
+#         if self.head ==None:
+#             return self
+#         newNode= Node(val)
+#         runner=self.head
+#         counter=0
+#         if n==0:
+#             newNode.next=runner
+#             self.head=newNode
+#             return self
+#         while (runner.next!=None):
+#             counter+=1
+#             if counter==n:
+#                 newNode.next=runner.next
+#                 runner.next=newNode
+#                 return self
+#             elif counter+1==n:
+#                 self.addBack(val)
+#                 return self
+#             runner=runner.next
+#         return self
+
+        
+
+# my_list = SLL()	# create a new instance of a list
+# # my_list.printValues().removeBack().printValues()
+# my_list.addBack(0).addBack(1).addBack(2).addBack(3).printValues().insertVal(100,4).printValues()
+# # chaining, yeah!
+# # output should be:
+# # Linked lists
+# # are
+# # fun!
+
+#----------------------Leet
+class Node:
+    def __init__(self, val):
+        self.value=val
+        self.next=None
+        
+class MyLinkedList:
+
     def __init__(self):
+        """
+        Initialize your data structure here.
+        """
         self.head=None
 
-    def printValues(self):
+    def get(self, index: int) -> int:
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+        """
+        if self.head==None:
+            return
+        if index==0:
+            return self.head.value
+        if index<0:
+            return -1
+        counter=0
         runner=self.head
-        while (runner !=None):
-            print(runner.value)
+        while (runner!=None):
+            if counter==index:
+                return runner.value
+            if counter> index:
+                return -1
+            counter+=1
             runner=runner.next
+        return -1
+            
+
+    def addAtHead(self, val: int) -> None:
+        """
+        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+        """
+        newNode=Node(val)
+        curHead=self.head
+        newNode.next=curHead
+        self.head=newNode
         return self
 
-    def addBack(self, value):
-        newNode=Node(value)
+    def addAtTail(self, val: int) -> None:
+        """
+        Append a node of value val to the last element of the linked list.
+        """
+        newNode=Node(val)
         if self.head == None:
             self.head=newNode
             return self
@@ -241,73 +370,97 @@ class SLL:
             runner=runner.next
         runner.next=newNode
         return self
-    
-    def addFront(self, value):
-        newNode=Node(value)
-        curHead=self.head
-        newNode.next=curHead
-        self.head=newNode
-        return self
-    
-    def removeBack(self):
-        if self.head==None:
-            return self
-        runner=self.head
-        while (runner.next.next != None):
-            runner=runner.next
-        runner.next=None
-        return self
-    
-    def removeFront(self):
-        if self.head == None:
-            return self
-        self.head=self.head.next
-        return self
+        
 
-    def removeVal(self, val):
-        if self.head==None:
-            return self
-        if self.head.value==val:
-            self.head=self.head.next
-            return self
-        runner=self.head
-        while (runner.next !=None):
-            if runner.next.value==val:
-                runner.next=runner.next.next
-                return self
-            runner=runner.next
-        return self
-
-    def insertVal(self, val, n):
-        if self.head ==None:
-            return self
+    def addAtIndex(self, index: int, val: int) -> None:
+        """
+        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        """
+        # if self.head ==None:
+        #     return self
         newNode= Node(val)
         runner=self.head
         counter=0
-        if n==0:
+        if index==0:
             newNode.next=runner
             self.head=newNode
             return self
         while (runner.next!=None):
             counter+=1
-            if counter==n:
+            if counter==index:
                 newNode.next=runner.next
                 runner.next=newNode
                 return self
-            elif counter+1==n:
-                self.addBack(val)
+            # elif counter+1==index:
+            #     self.addAtTail(val)
+            #     return self
+            # elif index>counter+1:
+            #     return self
+            runner=runner.next
+        counter+=1
+        if counter==index:
+            runner.next=newNode
+        return self
+
+    def deleteAtIndex(self, index: int) -> None:
+        """
+        Delete the index-th node in the linked list, if the index is valid.
+        """
+        if self.head==None:
+            return self
+        if index==0:
+            self.head=self.head.next
+            return self
+        if index<0:
+            return -1
+        counter=0
+        runner= self.head
+        while (runner.next!=None):
+            counter+=1
+            if counter==index:
+                runner.next=runner.next.next
                 return self
+            runner=runner.next
+        if index>counter:
+            return -1
+        
+    def printValues(self):
+        runner=self.head
+        while (runner !=None):
+            print(runner.value)
             runner=runner.next
         return self
 
-        
 
-my_list = SLL()	# create a new instance of a list
-# my_list.printValues().removeBack().printValues()
-my_list.addBack(0).addBack(1).addBack(2).addBack(3).printValues().insertVal(100,4).printValues()
-# chaining, yeah!
-# output should be:
-# Linked lists
-# are
-# fun!
+
+# Your MyLinkedList object will be instantiated and called as such:
+# ["MyLinkedList","addAtHead","get","addAtHead","addAtHead","deleteAtIndex","addAtHead","get","get","get","addAtHead","deleteAtIndex"]
+# [[],[4],[1],[1],[5],[3],[7],[3],[3],[3],[1],[4]]
+
+
+x=MyLinkedList()
+x.addAtHead(4).printValues()
+print("--------")
+print(x.get(1))
+print("--------")
+x.addAtHead(1).printValues()
+print("--------")
+x.addAtHead(5).printValues()
+print("--------")
+x.deleteAtIndex(3)
+print("--------")
+x.addAtHead(7).printValues()
+print("--------")
+print(x.get(3))
+print("--------")
+print(x.get(3))
+print("--------")
+print(x.get(3))
+print("--------")
+x.addAtHead(1).printValues()
+print("--------")
+x.deleteAtIndex(4)
+print("--------")
+
+
 
