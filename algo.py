@@ -12,12 +12,35 @@
 # print(x)
 
 # def rreverse(s):
-#     if s == "":
+#     if len(s) == "":
 #         return s
 #     else:
-#         return rreverse(s[1:]) + s[0]
+#         return rreverse(s[1:])+(s[0])
 
-# print(rreverse("Hello"))
+# s=["H","e","l","l","o"]
+# print(rreverse(s))
+
+class Solution:
+  def reverse(self, string):
+    if len(string) == 0:
+      return string
+    else:
+      return self.reverse(string[1:]) + string[0]
+
+  def reverseIterative(self, string):
+    answer = ''
+    stack = [string]
+    while len(stack):
+      item = stack.pop()
+      answer += item[-1]
+
+      nextItem = item[:-1]
+      if len(nextItem):
+        stack.append(nextItem)
+    return answer
+
+a = 'hello'
+print(Solution().reverse(a))
 
 # def selectionSort(listGiven):
 #     holder=0
@@ -312,155 +335,156 @@
 # # fun!
 
 #----------------------Leet
-class Node:
-    def __init__(self, val):
-        self.value=val
-        self.next=None
+# class Node:
+#     def __init__(self, val):
+#         self.value=val
+#         self.next=None
         
-class MyLinkedList:
+# class MyLinkedList:
 
-    def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.head=None
+#     def __init__(self):
+#         """
+#         Initialize your data structure here.
+#         """
+#         self.head=None
 
-    def get(self, index: int) -> int:
-        """
-        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-        """
-        if self.head==None:
-            return
-        if index==0:
-            return self.head.value
-        if index<0:
-            return -1
-        counter=0
-        runner=self.head
-        while (runner!=None):
-            if counter==index:
-                return runner.value
-            if counter> index:
-                return -1
-            counter+=1
-            runner=runner.next
-        return -1
+#     def get(self, index: int) -> int:
+#         """
+#         Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+#         """
+#         if self.head==None:
+#             return
+#         if index==0:
+#             return self.head.value
+#         if index<0:
+#             return -1
+#         counter=0
+#         runner=self.head
+#         while (runner!=None):
+#             if counter==index:
+#                 return runner.value
+#             if counter> index:
+#                 return -1
+#             counter+=1
+#             runner=runner.next
+#         return -1
             
 
-    def addAtHead(self, val: int) -> None:
-        """
-        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
-        """
-        newNode=Node(val)
-        curHead=self.head
-        newNode.next=curHead
-        self.head=newNode
-        return self
+#     def addAtHead(self, val: int) -> None:
+#         """
+#         Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+#         """
+#         newNode=Node(val)
+#         curHead=self.head
+#         newNode.next=curHead
+#         self.head=newNode
+#         return self
 
-    def addAtTail(self, val: int) -> None:
-        """
-        Append a node of value val to the last element of the linked list.
-        """
-        newNode=Node(val)
-        if self.head == None:
-            self.head=newNode
-            return self
-        runner= self.head
-        while (runner.next != None):
-            runner=runner.next
-        runner.next=newNode
-        return self
+#     def addAtTail(self, val: int) -> None:
+#         """
+#         Append a node of value val to the last element of the linked list.
+#         """
+#         newNode=Node(val)
+#         if self.head == None:
+#             self.head=newNode
+#             return self
+#         runner= self.head
+#         while (runner.next != None):
+#             runner=runner.next
+#         runner.next=newNode
+#         return self
         
 
-    def addAtIndex(self, index: int, val: int) -> None:
-        """
-        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
-        """
-        # if self.head ==None:
-        #     return self
-        newNode= Node(val)
-        runner=self.head
-        counter=0
-        if index==0:
-            newNode.next=runner
-            self.head=newNode
-            return self
-        while (runner.next!=None):
-            counter+=1
-            if counter==index:
-                newNode.next=runner.next
-                runner.next=newNode
-                return self
-            # elif counter+1==index:
-            #     self.addAtTail(val)
-            #     return self
-            # elif index>counter+1:
-            #     return self
-            runner=runner.next
-        counter+=1
-        if counter==index:
-            runner.next=newNode
-        return self
+#     def addAtIndex(self, index: int, val: int) -> None:
+#         """
+#         Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+#         """
+#         # if self.head ==None:
+#         #     return self
+#         newNode= Node(val)
+#         runner=self.head
+#         counter=0
+#         if index==0:
+#             newNode.next=runner
+#             self.head=newNode
+#             return self
+#         while (runner.next!=None):
+#             counter+=1
+#             if counter==index:
+#                 newNode.next=runner.next
+#                 runner.next=newNode
+#                 return self
+#             # elif counter+1==index:
+#             #     self.addAtTail(val)
+#             #     return self
+#             # elif index>counter+1:
+#             #     return self
+#             runner=runner.next
+#         counter+=1
+#         if counter==index:
+#             runner.next=newNode
+#         return self
 
-    def deleteAtIndex(self, index: int) -> None:
-        """
-        Delete the index-th node in the linked list, if the index is valid.
-        """
-        if self.head==None:
-            return self
-        if index==0:
-            self.head=self.head.next
-            return self
-        if index<0:
-            return -1
-        counter=0
-        runner= self.head
-        while (runner.next!=None):
-            counter+=1
-            if counter==index:
-                runner.next=runner.next.next
-                return self
-            runner=runner.next
-        if index>counter:
-            return -1
+#     def deleteAtIndex(self, index: int) -> None:
+#         """
+#         Delete the index-th node in the linked list, if the index is valid.
+#         """
+#         if self.head==None:
+#             return self
+#         if index==0:
+#             self.head=self.head.next
+#             return self
+#         if index<0:
+#             return -1
+#         counter=0
+#         runner= self.head
+#         while (runner.next!=None):
+#             counter+=1
+#             if counter==index:
+#                 runner.next=runner.next.next
+#                 return self
+#             runner=runner.next
+#         if index>counter:
+#             return -1
         
-    def printValues(self):
-        runner=self.head
-        while (runner !=None):
-            print(runner.value)
-            runner=runner.next
-        return self
+#     def printValues(self):
+#         runner=self.head
+#         while (runner !=None):
+#             print(runner.value)
+#             runner=runner.next
+#         return self
 
 
 
-# Your MyLinkedList object will be instantiated and called as such:
-# ["MyLinkedList","addAtHead","get","addAtHead","addAtHead","deleteAtIndex","addAtHead","get","get","get","addAtHead","deleteAtIndex"]
-# [[],[4],[1],[1],[5],[3],[7],[3],[3],[3],[1],[4]]
+# # Your MyLinkedList object will be instantiated and called as such:
+# # ["MyLinkedList","addAtHead","get","addAtHead","addAtHead","deleteAtIndex","addAtHead","get","get","get","addAtHead","deleteAtIndex"]
+# # [[],[4],[1],[1],[5],[3],[7],[3],[3],[3],[1],[4]]
 
 
-x=MyLinkedList()
-x.addAtHead(4).printValues()
-print("--------")
-print(x.get(1))
-print("--------")
-x.addAtHead(1).printValues()
-print("--------")
-x.addAtHead(5).printValues()
-print("--------")
-x.deleteAtIndex(3)
-print("--------")
-x.addAtHead(7).printValues()
-print("--------")
-print(x.get(3))
-print("--------")
-print(x.get(3))
-print("--------")
-print(x.get(3))
-print("--------")
-x.addAtHead(1).printValues()
-print("--------")
-x.deleteAtIndex(4)
-print("--------")
+# x=MyLinkedList()
+# x.addAtHead(4).printValues()
+# print("--------")
+# print(x.get(1))
+# print("--------")
+# x.addAtHead(1).printValues()
+# print("--------")
+# x.addAtHead(5).printValues()
+# print("--------")
+# x.deleteAtIndex(3)
+# print("--------")
+# x.addAtHead(7).printValues()
+# print("--------")
+# print(x.get(3))
+# print("--------")
+# print(x.get(3))
+# print("--------")
+# print(x.get(3))
+# print("--------")
+# x.addAtHead(1).printValues()
+# print("--------")
+# x.deleteAtIndex(4)
+# print("--------")
+#====================REFACTOR ABOVE WITH SIZE ATTRIBUTE AND ALSO WITH DOUBELY LINKED LIST
 
 
 
