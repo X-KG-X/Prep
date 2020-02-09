@@ -20,27 +20,27 @@
 # s=["H","e","l","l","o"]
 # print(rreverse(s))
 
-class Solution:
-  def reverse(self, string):
-    if len(string) == 0:
-      return string
-    else:
-      return self.reverse(string[1:]) + string[0]
+# class Solution:
+#   def reverse(self, string):
+#     if len(string) == 0:
+#       return string
+#     else:
+#       return self.reverse(string[1:]) + string[0]
 
-  def reverseIterative(self, string):
-    answer = ''
-    stack = [string]
-    while len(stack):
-      item = stack.pop()
-      answer += item[-1]
+#   def reverseIterative(self, string):
+#     answer = ''
+#     stack = [string]
+#     while len(stack):
+#       item = stack.pop()
+#       answer += item[-1]
 
-      nextItem = item[:-1]
-      if len(nextItem):
-        stack.append(nextItem)
-    return answer
+#       nextItem = item[:-1]
+#       if len(nextItem):
+#         stack.append(nextItem)
+#     return answer
 
-a = 'hello'
-print(Solution().reverse(a))
+# a = 'hello'
+# print(Solution().reverse(a))
 
 # def selectionSort(listGiven):
 #     holder=0
@@ -487,4 +487,13 @@ print(Solution().reverse(a))
 #====================REFACTOR ABOVE WITH SIZE ATTRIBUTE AND ALSO WITH DOUBELY LINKED LIST
 
 
-
+class Solution:
+    def decompressRLElist(self, nums):
+        ans=[]
+        for i in range(0,len(nums),2):
+            temp=[nums[i+1]]*nums[i]
+            ans=ans+temp
+            temp=[]
+        return ans
+            
+print(Solution().decompressRLElist([1,2,3,4]))
