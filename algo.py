@@ -487,13 +487,48 @@
 #====================REFACTOR ABOVE WITH SIZE ATTRIBUTE AND ALSO WITH DOUBELY LINKED LIST
 
 
-class Solution:
-    def decompressRLElist(self, nums):
-        ans=[]
-        for i in range(0,len(nums),2):
-            temp=[nums[i+1]]*nums[i]
-            ans=ans+temp
-            temp=[]
-        return ans
+# class Solution:
+#     def decompressRLElist(self, nums):
+#         ans=[]
+#         for i in range(0,len(nums),2):
+#             temp=[nums[i+1]]*nums[i]
+#             ans=ans+temp
+#             temp=[]
+#         return ans
             
-print(Solution().decompressRLElist([1,2,3,4]))
+# print(Solution().decompressRLElist([1,2,3,4]))
+
+
+# class Solution:
+#     # def pivotIndex(self, nums: List[int]) -> int:
+#     #     for i in range(0,len(nums)):
+#     #         if sum(nums[:i])==sum(nums[i+1:]):
+#     #             return i
+#     #     return -1
+    
+#     def pivotIndexAlt(self, nums: List[int]) -> int:
+#         total=sum(nums)
+#         curSum=0
+#         for i in range(0,len(nums)):
+#             if total-curSum-nums[i]==curSum:
+#                 return i
+#             curSum+=nums[i]
+#         return -1
+            
+
+class Solution:
+    def dominantIndex(self, nums):
+        max=nums[0]
+        if len(nums)==1:
+            return 0
+        if len(nums)==0:
+            return -1
+        for i in range(1, len(nums)):
+            if nums[i]>=nums[i-1]:
+                max=nums[i]
+                index=i
+        for j in range(0,len(nums)):
+            if nums[j]*2<max:
+                return index
+            return -1
+
