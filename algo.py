@@ -516,19 +516,31 @@
 #         return -1
             
 
+# class Solution:
+#     def dominantIndex(self, nums):
+#         max=nums[0]
+#         if len(nums)==1:
+#             return 0
+#         if len(nums)==0:
+#             return -1
+#         for i in range(1, len(nums)):
+#             if nums[i]>=nums[i-1]:
+#                 max=nums[i]
+#                 index=i
+#         for j in range(0,len(nums)):
+#             if nums[j]*2<max:
+#                 return index
+#             return -1
+
 class Solution:
-    def dominantIndex(self, nums):
-        max=nums[0]
-        if len(nums)==1:
-            return 0
-        if len(nums)==0:
-            return -1
-        for i in range(1, len(nums)):
-            if nums[i]>=nums[i-1]:
-                max=nums[i]
-                index=i
-        for j in range(0,len(nums)):
-            if nums[j]*2<max:
-                return index
-            return -1
+    def plusOne(self, digits: List[int]) -> List[int]:
+        for i in range(len(digits)-1,-1,-1):
+            if digits[i]!=9:
+                digits[i]+=1
+                return digits
+            else:
+                digits[i]=0
+        digits.insert(0,1)
+        return digits
+            
 
