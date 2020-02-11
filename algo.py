@@ -532,15 +532,45 @@
 #                 return index
 #             return -1
 
-class Solution:
-    def plusOne(self, digits: List[int]) -> List[int]:
-        for i in range(len(digits)-1,-1,-1):
-            if digits[i]!=9:
-                digits[i]+=1
-                return digits
-            else:
-                digits[i]=0
-        digits.insert(0,1)
-        return digits
+# class Solution:
+#     def plusOne(self, digits):
+#         for i in range(len(digits)-1,-1,-1):
+#             if digits[i]!=9:
+#                 digits[i]+=1
+#                 return digits
+#             else:
+#                 digits[i]=0
+#         digits.insert(0,1)
+#         return digits
             
+class Solution:
+    def findDiagonalOrder(self, matrix):
+        if len(matrix)==0:
+            return matrix
+        m=len(matrix)
+        n=len(matrix[0])
+        i=0
+        j=0
+        result=[]
+        for k in range(0, m*n):
+            result.append(matrix[i][j])
+            if (i+j) %2==0:
+                if j==n-1:
+                    i+=1
+                elif i==0:
+                    j+=1
+                else:
+                    i-=1
+                    j+=1
+            else:
+                if i==m-1:
+                    j+=1
+                elif j==0:
+                    i+=1
+                else:
+                    i+=1
+                    j-=1
+        return result
 
+x=[[1,2,3],[4,5,6],[7,8,9]]
+print(Solution().findDiagonalOrder(x))
