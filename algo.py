@@ -575,40 +575,66 @@
 # x=[[1,2,3],[4,5,6],[7,8,9]]
 # print(Solution().findDiagonalOrder(x))
 
-class Solution:
-    def spiralOrder(self, matrix):
-        if len(matrix)==0:
-            return matrix
-        #dir 0:left, 1:down, 2:right, 3:up
-        dir=0
-        m=len(matrix)
-        n=len(matrix[0])
+# class Solution:
+#     def spiralOrder(self, matrix):
+#         if len(matrix)==0:
+#             return matrix
+#         #dir 0:left, 1:down, 2:right, 3:up
+#         dir=0
+#         m=len(matrix)
+#         n=len(matrix[0])
         
-        # 4 pointers top, down, left, right
-        top=0
-        bottom=m-1
-        left=0
-        right=n-1
-        result=[]
-        while(top<=bottom and left<=right):
-            if dir==0:
-                for i in range(left,right+1):
-                    result.append(matrix[top][i])
-                top+=1
-            elif dir==1:
-                for i in range(top,bottom+1):
-                    result.append(matrix[i][right])
-                right-=1
-            elif dir==2:
-                for i in range(right,left-1,-1):
-                    result.append(matrix[bottom][i])
-                bottom-=1
-            elif dir==3:
-                for i in range(bottom, top-1, -1):
-                    result.append(matrix[i][left])
-                left+=1
-            dir=(dir+1) %4
-        return result
+#         # 4 pointers top, down, left, right
+#         top=0
+#         bottom=m-1
+#         left=0
+#         right=n-1
+#         result=[]
+#         while(top<=bottom and left<=right):
+#             if dir==0:
+#                 for i in range(left,right+1):
+#                     result.append(matrix[top][i])
+#                 top+=1
+#             elif dir==1:
+#                 for i in range(top,bottom+1):
+#                     result.append(matrix[i][right])
+#                 right-=1
+#             elif dir==2:
+#                 for i in range(right,left-1,-1):
+#                     result.append(matrix[bottom][i])
+#                 bottom-=1
+#             elif dir==3:
+#                 for i in range(bottom, top-1, -1):
+#                     result.append(matrix[i][left])
+#                 left+=1
+#             dir=(dir+1) %4
+#         return result
 
-x=[[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
-print(Solution().spiralOrder(x))
+# x=[[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
+# print(Solution().spiralOrder(x))
+# from queue import *
+class Solution:
+    def generate(self, numRows):
+        result=[[1],[1,1]]
+        # Q=Queue(maxsize=2)
+        if numRows==0:
+            return
+        if numRows==1:
+            return result[0]
+        if numRows==2:
+            return result
+        for i in range(2,numRows):
+            for j in range(0,len(result)+1):
+                if j==0:
+                    result.append([1])
+                    print(len(result))
+                elif j<len(result)-1:
+                    print(result[i-1][j-1])
+                    print(result[i-1][j])
+                    result[i].append(result[i-1][j-1]+result[i-1][j])
+                else:
+                    result[i].append(1)
+                    # Q.get()
+                    # Q.get()
+        return result
+print(Solution().generate(5))
