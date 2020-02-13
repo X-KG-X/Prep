@@ -20,7 +20,6 @@
 # s=["H","e","l","l","o"]
 # print(rreverse(s))
 
-# class Solution:
 #   def reverse(self, string):
 #     if len(string) == 0:
 #       return string
@@ -487,7 +486,7 @@
 #====================REFACTOR ABOVE WITH SIZE ATTRIBUTE AND ALSO WITH DOUBELY LINKED LIST
 
 
-# class Solution:
+class Solution:
 #     def decompressRLElist(self, nums):
 #         ans=[]
 #         for i in range(0,len(nums),2):
@@ -499,7 +498,7 @@
 # print(Solution().decompressRLElist([1,2,3,4]))
 
 
-# class Solution:
+#
 #     # def pivotIndex(self, nums: List[int]) -> int:
 #     #     for i in range(0,len(nums)):
 #     #         if sum(nums[:i])==sum(nums[i+1:]):
@@ -516,7 +515,7 @@
 #         return -1
             
 
-# class Solution:
+#
 #     def dominantIndex(self, nums):
 #         max=nums[0]
 #         if len(nums)==1:
@@ -532,7 +531,7 @@
 #                 return index
 #             return -1
 
-# class Solution:
+#
 #     def plusOne(self, digits):
 #         for i in range(len(digits)-1,-1,-1):
 #             if digits[i]!=9:
@@ -543,7 +542,7 @@
 #         digits.insert(0,1)
 #         return digits
             
-# class Solution:
+#
 #     def findDiagonalOrder(self, matrix):
 #         if len(matrix)==0:
 #             return matrix
@@ -575,7 +574,7 @@
 # x=[[1,2,3],[4,5,6],[7,8,9]]
 # print(Solution().findDiagonalOrder(x))
 
-# class Solution:
+#
 #     def spiralOrder(self, matrix):
 #         if len(matrix)==0:
 #             return matrix
@@ -613,7 +612,7 @@
 # x=[[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
 # print(Solution().spiralOrder(x))
 # from queue import *
-# class Solution:
+#
 #     def generate(self, numRows):
 #         result=[[1],[1,1]]
 #         # Q=Queue(maxsize=2)
@@ -639,7 +638,6 @@
 #         return result
 # print(Solution().generate(5))
 
-class Solution:
     def addBinary(self, a: str, b: str) -> str:
         carry=0
         result=""
@@ -658,4 +656,28 @@ class Solution:
         a = int(a, 2)
         b = int(b, 2)
         return ("" + bin(a+b))[2:]
-print(Solution().altAddBinary("11","1"))
+
+
+    def strStr(self, haystack: str, needle: str) -> int:
+        if not needle:
+            return 0
+        return haystack.find(needle)
+
+    def longestCommonPrefix(self, strs):
+        if strs==[]:
+            return ""
+        elif len(strs)==1:
+            return strs[0]
+        common=""
+        minLen=len(min(strs))
+        for i in range(minLen):
+            for j in range(len(strs)-1):
+                if strs[j][i]!=strs[j+1][i]:
+                    return common
+            common+=strs[j][i]
+        return common
+
+
+# print(Solution().altAddBinary("11","1"))
+# print(Solution().strStr("book","k"))
+print(Solution().longestCommonPrefix(["flower","flow", "flight"]))
