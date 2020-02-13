@@ -613,28 +613,49 @@
 # x=[[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
 # print(Solution().spiralOrder(x))
 # from queue import *
+# class Solution:
+#     def generate(self, numRows):
+#         result=[[1],[1,1]]
+#         # Q=Queue(maxsize=2)
+#         if numRows==0:
+#             return
+#         if numRows==1:
+#             return result[0]
+#         if numRows==2:
+#             return result
+#         for i in range(2,numRows):
+#             for j in range(0,len(result)+1):
+#                 if j==0:
+#                     result.append([1])
+#                     print(len(result))
+#                 elif j<len(result)-1:
+#                     print(result[i-1][j-1])
+#                     print(result[i-1][j])
+#                     result[i].append(result[i-1][j-1]+result[i-1][j])
+#                 else:
+#                     result[i].append(1)
+#                     # Q.get()
+#                     # Q.get()
+#         return result
+# print(Solution().generate(5))
+
 class Solution:
-    def generate(self, numRows):
-        result=[[1],[1,1]]
-        # Q=Queue(maxsize=2)
-        if numRows==0:
-            return
-        if numRows==1:
-            return result[0]
-        if numRows==2:
-            return result
-        for i in range(2,numRows):
-            for j in range(0,len(result)+1):
-                if j==0:
-                    result.append([1])
-                    print(len(result))
-                elif j<len(result)-1:
-                    print(result[i-1][j-1])
-                    print(result[i-1][j])
-                    result[i].append(result[i-1][j-1]+result[i-1][j])
-                else:
-                    result[i].append(1)
-                    # Q.get()
-                    # Q.get()
-        return result
-print(Solution().generate(5))
+    def addBinary(self, a: str, b: str) -> str:
+        carry=0
+        result=""
+        aList=list(a)
+        bList=list(b)
+        while aList or bList or carry==1:
+            if aList:
+                carry+=int(aList.pop())
+            if bList:
+                carry+=int(bList.pop())
+            result=str(carry%2)+result
+
+            carry //=2
+        return result  
+    def altAddBinary(self, a: str, b: str) -> str:         
+        a = int(a, 2)
+        b = int(b, 2)
+        return ("" + bin(a+b))[2:]
+print(Solution().altAddBinary("11","1"))
