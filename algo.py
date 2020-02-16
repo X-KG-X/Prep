@@ -677,7 +677,100 @@ class Solution:
             common+=strs[j][i]
         return common
 
+    def reverseString2point(self, s) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        i=0
+        j=len(s)-1
+        while i<j:
+            s[i],s[j]=s[j],s[i]
+            i+=1
+            j-=1
+        print(s)
+        return
+    
+    def arrayPairSum(self, nums) -> int:
+        nums.sort()
+        # i=0
+        # j=1
+        ans=0
+        # small=0
+        # while j<len(nums):
+        #     small=min(nums[i], nums[j])
+        #     ans+=small
+        #     i+=2
+
+        #     j+=2
+        # return ans
+        for i in range(0, len(nums),2):
+            ans+=nums[i]
+        return ans
+    
+    # def twoSum(self, numbers, target):
+    #     for i in range(len(numbers)):
+    #         for j in range(i+1, len(numbers)):
+    #             if numbers[j]>target:
+    #                 break
+    #             if numbers[i]+numbers[j]==target:
+    #                 return [i+1,j+1]
+    #     return
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        a={}
+        y=enumerate(numbers)
+        for index,i in y:
+            print(index, i)
+            if target-i in a:
+                return a[target-i]+1,index+1
+            a[i]=index
+        
+    def removeElement(self, nums, val):
+        i=0
+        while i<len(nums):
+            if nums[i]==val:
+                nums.pop(i)
+            else:
+                i+=1
+        x=len(nums)
+        return x
+    def findMaxConsecutiveOnes(self, nums):
+        sum1=0
+        sum2=0
+        for i in range(len(nums)):
+            if nums[i]==1:
+                sum1+=1
+            else:
+                if sum1>=sum2:
+                    sum2=sum1
+                sum1=0
+        return max(sum1,sum2)
+        
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        count=float("inf")
+        j=0
+        summ=0
+        for i in range(len(nums)):
+            summ+=nums[i]  
+            while summ>=s:
+                count=min(count,i-j+1)
+                summ-=nums[j]
+                j+=1
+        if count==float("inf"):
+            count=0
+        return count
+
+
 
 # print(Solution().altAddBinary("11","1"))
 # print(Solution().strStr("book","k"))
-print(Solution().longestCommonPrefix(["flower","flow", "flight"]))
+# print(Solution().longestCommonPrefix(["flower","flow", "flight"]))
+# print(Solution().reverseString2point(["h","e","l","l","o"]))
+# print(Solution().arrayPairSum([4,2,3,1]))
+# print(Solution().twoSum([-1,0],-1))
+# print(Solution().removeElement([3,2,2,3],3))
+print(Solution().findMaxConsecutiveOnes([0,1]))
