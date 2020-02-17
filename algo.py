@@ -750,7 +750,7 @@ class Solution:
                 sum1=0
         return max(sum1,sum2)
         
-    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+    def minSubArrayLen(self, s: int, nums):
         count=float("inf")
         j=0
         summ=0
@@ -764,7 +764,68 @@ class Solution:
             count=0
         return count
 
+    def rotate(self, nums, k):
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        for i in range(k):
+            nums.insert(0,nums.pop())
 
+    def getRow(self, rowIndex):
+        res=[[1],[1,1]]
+        for i in range(2,rowIndex+1):
+            res.append([1])
+            for j in range(1,i):
+                res[i].append(res[i-1][j-1]+res[i-1][j])
+            res[i].append(1)
+        return res[rowIndex]
+
+    def reverseWords(self, s):
+        # words=s.split()
+        # newStr=""
+        # for i in range(len(words)-1, -1, -1):
+        #     newStr+=words[i]+" "
+        # return newStr.strip()
+        return ' '.join(s.strip().split()[::-1])
+
+    def reverseWordsIII(self, s):
+        return " ".join(s[::-1].strip().split()[::-1])
+
+    def removeDuplicates(self, nums):
+        # if len(nums)==1:
+        #     return 1
+        # if len(nums)==0:
+        #     return 0
+        # i=0
+        # while i<len(nums):
+        #     while nums[i]==nums[i+1]:
+        #         nums.pop(i+1)
+        #         if len(nums)==1:
+        #             return 1
+        #         if i==len(nums)-1:
+        #             return i+1
+        #     if len(nums)>1:
+        #         i+=1
+        #     if i==len(nums)-1:
+        #         return len(nums)
+        slow=0
+        for fast in range(len(nums)):
+            if nums[slow]!=nums[fast]:
+                slow+=1
+                nums[slow]=nums[fast]
+        return slow+1
+
+
+    def moveZeroes(self, nums):
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        slow=0
+        for fast in range(len(nums)):
+            if nums[fast]!=0:
+                nums[slow], nums[fast]=nums[fast], nums[slow]
+                slow+=1   
+        return nums
 
 # print(Solution().altAddBinary("11","1"))
 # print(Solution().strStr("book","k"))
