@@ -827,6 +827,8 @@ class Solution:
                 slow+=1   
         return nums
 
+
+
 # print(Solution().altAddBinary("11","1"))
 # print(Solution().strStr("book","k"))
 # print(Solution().longestCommonPrefix(["flower","flow", "flight"]))
@@ -835,3 +837,5 @@ class Solution:
 # print(Solution().twoSum([-1,0],-1))
 # print(Solution().removeElement([3,2,2,3],3))
 print(Solution().findMaxConsecutiveOnes([0,1]))
+
+
