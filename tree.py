@@ -71,10 +71,50 @@ class Solution:
                     result.append([])
                 result[level].append(cur.val)
         return result
+    
+    def maxDepth(self, root):
+        if root==None:
+            return 0
+        left_depth=self.maxDepth(root.left)
+        right_depth=self.maxDepth(root.right)
+        max_d= max(left_depth,right_depth)+1
+        return max_d
+    
+    def maxDepthIterative(self, root):
+        if root==None:
+            return 0
+        stack=[[root, 1]]
+        ans=0
+        while stack:
+            cur, depth=stack.pop()
+            if cur:
+                ans=max(ans,depth)
+                stack.append([cur.left,depth+1])
+                stack.append([cur.right,depth+1])
+        return ans
+    
+    def isSymmetric(self, root):
+        if root==None or (root.left==None and root.right==None):
+            return True
+        lQ=[root.left]
+        rQ=[root.right]
+        while lQ and rQ:
+            l=lQ.pop(0)
+            r=rQ.pop(0)
+            if bool(l) != bool(r):
+                return False
+            if l and r:
+                if l.val !=r.val:
+                    return False
+                lQ.append(l.left)
+                lQ.append(l.right)
+                rQ.append(r.right)
+                rQ.append(r.left)
+        return True
 
 exampleTree=Node(1)
 exampleTree.left=Node(2)
 exampleTree.right=Node(3)
 exampleTree.left.left=Node(4)
 exampleTree.right.right=Node(5)
-print(Solution().levelOrder(exampleTree))
+print(Solution().isSymmetric(exampleTree))
