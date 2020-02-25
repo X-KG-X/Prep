@@ -112,9 +112,32 @@ class Solution:
                 rQ.append(r.left)
         return True
 
+    def hasPathSumItretive(self, root, sum):
+        # total=0
+        if root==None:
+            return False
+        stack=[[root, root.val]]
+        while stack:
+            cur, total=stack.pop()
+            if not cur.left and not cur.right and total==sum:
+                return True
+            if cur.right:
+                stack.append([cur.right, total+cur.right.val])
+            if cur.left:
+                stack.append([cur.left, total+cur.left.val]) 
+        return False
+
+    def hasPathSum(self, root, sum):
+        if not root:
+            return False
+        sum-=root.val
+        if not root.left and not root.right:
+            return sum==0
+        return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
+
 exampleTree=Node(1)
 exampleTree.left=Node(2)
 exampleTree.right=Node(3)
 exampleTree.left.left=Node(4)
 exampleTree.right.right=Node(5)
-print(Solution().isSymmetric(exampleTree))
+print(Solution().hasPathSum(exampleTree,10))
