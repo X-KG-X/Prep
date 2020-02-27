@@ -135,9 +135,47 @@ class Solution:
             return sum==0
         return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
 
+    def countUnivalSubtrees(self, root):
+        if not root:
+            return 0
+        count=0
+        stack=[[root, False]]
+        while stack:
+            cur, visited=stack.pop()
+            if cur:
+                if visited:
+                    if not cur.left and not cur.right:
+                        count+=1
+                    else:
+                        count+=self.univHelper(cur)
+
+                else:
+                    stack.append([cur, True])
+                    stack.append([cur.right, False])
+                    stack.append([cur.left, False])
+        return count
+    
+    def univHelper(self, root):
+        isUni=True
+        stack=[root]
+        while stack and isUni:
+            cur=stack.pop()
+            if cur:
+                stack.append(cur.right)
+                stack.append(cur.left)
+                if not cur.left and not cur.right:
+                    pass
+                elif not cur.left:
+                    isUni=(cur.val==cur.right.val)
+                elif not cur.right:
+                    isUni=(cur.val==cur.left.val)
+                else:
+                    isUni=(cur.val==cur.left.val) and (cur.val==cur.right.val)
+        return isUni
+
 exampleTree=Node(1)
 exampleTree.left=Node(2)
 exampleTree.right=Node(3)
 exampleTree.left.left=Node(4)
 exampleTree.right.right=Node(5)
-print(Solution().hasPathSum(exampleTree,10))
+print(Solution().countUnivalSubtrees(exampleTree))
