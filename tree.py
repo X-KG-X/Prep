@@ -135,7 +135,24 @@ class Solution:
             return sum==0
         return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
 
+
     def countUnivalSubtrees(self, root):
+        self.count=0
+        self.isUniv(root,0)
+        return self.count
+    
+    def isUniv(self, cur, val):
+        if not cur:
+            return True
+        
+        if not all([self.isUniv(cur.left, cur.val),self.isUniv(cur.right, cur.val)]):
+            return False
+        
+        self.count+=1
+        
+        return cur.val==val
+
+    def countUnivalSubtreesIterative(self, root):
         if not root:
             return 0
         count=0
@@ -173,9 +190,57 @@ class Solution:
                     isUni=(cur.val==cur.left.val) and (cur.val==cur.right.val)
         return isUni
 
+    def buildTree(self, inorder, postorder):
+        if not inorder or not postorder:
+            return None
+        cur=postorder.pop()
+        root=Node(cur)
+        mid=inorder.index(cur)
+        root.right=self.buildTree(inorder[mid+1:], postorder)
+        root.left=self.buildTree(inorder[:mid], postorder)
+        return root
+
+# Populating Next Right Pointers in Each Node
+    def connect(self, root):
+        if not root:
+            return root
+        
+        leftiest=root
+        while leftiest.left:
+            head=leftiest
+            while head:
+                head.left.next=head.right
+                
+                if head.next:
+                    head.right.next=head.next.left
+                head=head.next
+            leftiest=leftiest.left
+        return root
+
+# Populating Next Right Pointers in Each Node II
+    def connect(self, root):
+        if not root:
+            return root
+        # Q=[]
+        # Q.append(root)
+        Q=collections.deque([root])
+        while Q:
+            size=len(Q)
+            for i in range(size):
+                node =Q.popleft()
+                if i<size-1:
+                    node.next=Q[0]
+                
+                if node.left:
+                    Q.append(node.left)
+                if node.right:
+                    Q.append(node.right)
+        return root
+
+
 exampleTree=Node(1)
 exampleTree.left=Node(2)
 exampleTree.right=Node(3)
 exampleTree.left.left=Node(4)
 exampleTree.right.right=Node(5)
-print(Solution().countUnivalSubtrees(exampleTree))
+print(Solution().buildTree([9,3,15,20,7],[9,15,7,20,3]))
