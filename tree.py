@@ -1,3 +1,4 @@
+import collections
 class Node:
     def __init__(self, x):
         self.val = x
@@ -217,8 +218,9 @@ class Solution:
             leftiest=leftiest.left
         return root
 
+    
 # Populating Next Right Pointers in Each Node II
-    def connect(self, root):
+    def connect2(self, root):
         if not root:
             return root
         # Q=[]
@@ -236,6 +238,17 @@ class Solution:
                 if node.right:
                     Q.append(node.right)
         return root
+
+#   Lowest Common Ancestor of a Binary Tree
+    def lowestCommonAncestor(self, root, p, q):
+        if not root or root==p or root==q:
+            return root
+        left=self.lowestCommonAncestor(root.left,p,q)
+        right=self.lowestCommonAncestor(root.right,p,q)
+        if left and right:
+            return root
+        return left or right
+                    
 
 
 exampleTree=Node(1)
