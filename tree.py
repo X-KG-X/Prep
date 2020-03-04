@@ -248,6 +248,57 @@ class Solution:
         if left and right:
             return root
         return left or right
+
+# Serialize and Deserialize Binary Tree
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        result=[]
+        if not root:
+            return ''
+        Q=collections.deque([root])
+        while Q:
+            cur=Q.popleft()
+            if cur:
+                result.append(str(cur.val))
+                Q.append(cur.left)
+                Q.append(cur.right)
+            else:
+                result.append("#")
+            
+        print(','.join(result))
+        return ','.join(result)
+                
+        
+        
+            
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        if data=='':
+            return None
+        decoded=data.split(',')
+        root=TreeNode(int(decoded[0]))
+        Q=collections.deque([root])
+        index=1
+        while Q:
+            cur=Q.popleft()
+            if decoded[index] !="#":
+                cur.left=TreeNode(int(decoded[index]))
+                Q.append(cur.left)
+            index+=1
+            if decoded[index]!='#':
+                cur.right=TreeNode(int(decoded[index]))
+                Q.append(cur.right)
+            index+=1
+        return root
                     
 
 
