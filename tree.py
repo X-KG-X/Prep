@@ -285,17 +285,17 @@ class Solution:
         if data=='':
             return None
         decoded=data.split(',')
-        root=TreeNode(int(decoded[0]))
+        root=Node(int(decoded[0]))
         Q=collections.deque([root])
         index=1
         while Q:
             cur=Q.popleft()
             if decoded[index] !="#":
-                cur.left=TreeNode(int(decoded[index]))
+                cur.left=Node(int(decoded[index]))
                 Q.append(cur.left)
             index+=1
             if decoded[index]!='#':
-                cur.right=TreeNode(int(decoded[index]))
+                cur.right=Node(int(decoded[index]))
                 Q.append(cur.right)
             index+=1
         return root
