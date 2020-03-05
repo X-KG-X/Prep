@@ -272,10 +272,6 @@ class Solution:
         print(','.join(result))
         return ','.join(result)
                 
-        
-        
-            
-
     def deserialize(self, data):
         """Decodes your encoded data to tree.
         
@@ -299,6 +295,32 @@ class Solution:
                 Q.append(cur.right)
             index+=1
         return root
+  
+#   Validate Binary Search Tree
+    def isValidBST(self, root):
+        return self.isValid(root,float('-inf'), float('inf'))
+    def isValid(self, node, minVal, maxVal):
+        if not node:
+            return True
+        if node.val<=minVal or node.val>=maxVal:
+            return False
+        
+        left=self.isValid(node.left, minVal, node.val)
+        right=self.isValid(node.right, node.val, maxVal)
+        
+        return left and right
+        
+#         def inorder( node):
+#             result=[]
+#             if node:
+#                 result+=inorder(node.left)+[node.val]+inorder(node.right)
+#             return result
+
+#         a=inorder(root)
+#         for i in range(1,len(a)):
+#             if a[i-1]>=a[i]:
+#                 return False
+#         return True
                     
 
 
