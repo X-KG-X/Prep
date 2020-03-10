@@ -342,8 +342,50 @@ class Solution:
 #             if a[i-1]>=a[i]:
 #                 return False
 #         return True
-                    
 
+
+
+
+# Binary Search Tree Iterator
+                   
+class BSTIterator:
+
+    def __init__(self, root):
+        self.stack=[[root,False]]
+        self.root=root
+
+    def next(self):
+        """
+        @return the next smallest number
+        """
+        if not self.root:
+            return 
+        while self.stack:
+            # print(self.stack)
+            # print("------------------------------")
+            cur, visited=self.stack.pop()
+            if cur:
+                if visited:
+                    return cur.val
+                else:
+                    if cur.right:
+                        self.stack.append([cur.right,False])
+                    self.stack.append([cur,True])
+                    if cur.left:
+                        self.stack.append([cur.left,False])
+        return
+        
+
+    def hasNext(self):
+        """
+        @return whether we have a next smallest number
+        """
+        if not self.root:
+            return False
+        if len(self.stack)==0:
+            return False
+        else:
+            return True
 
 exampleTree=Node(1)
 exampleTree.left=Node(2)
