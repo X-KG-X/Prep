@@ -309,6 +309,27 @@ class Solution:
         right=self.isValid(node.right, node.val, maxVal)
         
         return left and right
+
+
+
+#   Inorder Successor in BST
+    def inorderSuccessor(self, root, p):
+        if not root:
+            return None
+        result=[]
+        stack=[[root,False]]
+        while stack:
+            cur, visited=stack.pop()
+            if cur:
+                if visited:
+                    result.append(cur.val)
+                    if len(result)>1 and result[-2]==p.val:
+                        return cur
+                else:
+                    stack.append([cur.right,False])
+                    stack.append([cur,True])
+                    stack.append([cur.left,False])
+        return None
         
 #         def inorder( node):
 #             result=[]
