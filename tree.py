@@ -330,6 +330,28 @@ class Solution:
                     stack.append([cur,True])
                     stack.append([cur.left,False])
         return None
+
+
+    def insertIntoBST(self, root, val):
+        if not root:
+            return Node(val)
+        stack=[[root,0]]
+        while stack:
+            cur, d=stack.pop()
+            if cur:
+                if val<cur.val:
+                    stack.append([cur.left,1])
+                else:
+                    stack.append([cur.right,2])
+                prev=cur
+            else:
+                if d==1:
+                    prev.left=Node(val)
+                    return root
+                elif d==2:
+                    prev.right=Node(val)
+                    return root     
+        return
         
 #         def inorder( node):
 #             result=[]
