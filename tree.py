@@ -365,6 +365,50 @@ class Solution:
 #                 return False
 #         return True
 
+# Delete Node in a BST
+    def deleteNode(self, root, key):
+        if not root:
+            return
+        if root.val==key and not root.left and not root.right:
+            return 
+        stack=[[root,0]]
+        holder=Node(None)
+        while stack:
+            cur,d=stack.pop()
+            if cur:    
+                if key==cur.val:
+                    holder=cur
+                    if cur.right:
+                        stack.append([cur.right,1])
+                    elif cur.left:
+                        stack.append([cur.left,2])
+                elif key>cur.val:
+                    if cur.right:
+                        stack.append([cur.right,1])   
+                    elif cur.left:
+                        stack.append([cur.left,2])
+                        holder.val=cur.val
+                        holder=cur
+                elif key<cur.val:
+                    if cur.left:
+                        stack.append([cur.left,2])
+                    elif cur.right:
+                        stack.append([cur.right,1])
+                        holder.val=cur.val
+                        holder=cur
+                
+                if not cur.left and not cur.right:
+                    if holder.val == False or holder.val:
+                        holder.val=cur.val
+                        if d==1:
+                            prev.right=None
+                        elif d==2:
+                            prev.left=None
+                        return root
+
+                prev=cur
+        return root
+                    
 
 
 
@@ -408,6 +452,7 @@ class BSTIterator:
             return False
         else:
             return True
+    
 
 exampleTree=Node(1)
 exampleTree.left=Node(2)
