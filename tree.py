@@ -410,7 +410,7 @@ class Solution:
         return root
                     
 # Balanced Binary Tree
-    def isBalanced(self, root, h=1):
+    def isBalanced(self, root, h=1): 
         if not root:
             return h
         l=self.isBalanced(root.left,h+1)
