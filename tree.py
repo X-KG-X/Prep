@@ -409,7 +409,44 @@ class Solution:
                 prev=cur
         return root
                     
-
+# Balanced Binary Tree
+    def isBalanced(self, root, h=1):
+        if not root:
+            return h
+        l=self.isBalanced(root.left,h+1)
+        if not l:
+            return 
+        r=self.isBalanced(root.right,h+1)
+        if not r:
+            return 
+        return abs(l-r)<2 and max(l,r)
+#     def isBalanced(self, root: TreeNode) -> bool:
+#         if not root:
+#             return True
+#         return abs(self.maxDepth(root.left)-self.maxDepth(root.right))<2 and self.isBalanced(root.left) and self.isBalanced(root.right)
+#     def maxDepth(self,root: TreeNode)->int:
+#         if not root:
+#             return 0
+#         stack=[[root, 0]]
+#         ans=0
+#         while stack:
+#             cur, depth=stack.pop()
+#             if cur:
+#                 stack.append([cur.left,depth+1])
+#                 stack.append([cur.right,depth+1])
+#             else:
+#                 ans=max(depth,ans) 
+#         return ans
+                
+exampleTree=Node(1)
+exampleTree.left=Node(2)
+exampleTree.left.left=Node(3)
+exampleTree.left.left.left=Node(4)
+exampleTree.right=Node(2)
+exampleTree.right.right=Node(3)
+exampleTree.right.right.right=Node(4)       
+print(Solution().isBalanced(exampleTree))
+        
 
 
 # Binary Search Tree Iterator
@@ -454,9 +491,4 @@ class BSTIterator:
             return True
     
 
-exampleTree=Node(1)
-exampleTree.left=Node(2)
-exampleTree.right=Node(3)
-exampleTree.left.left=Node(4)
-exampleTree.right.right=Node(5)
-print(Solution().buildTree([9,3,15,20,7],[9,15,7,20,3]))
+
