@@ -437,6 +437,17 @@ class Solution:
 #             else:
 #                 ans=max(depth,ans) 
 #         return ans
+
+
+#   Convert Sorted Array to Binary Search Tree
+      def sortedArrayToBST(self, nums):
+        if len(nums)==0:
+            return
+        mid=len(nums)//2
+        root=Node(nums[mid])
+        root.left=self.sortedArrayToBST(nums[:mid])
+        root.right=self.sortedArrayToBST(nums[mid+1:])
+        return root
                 
 exampleTree=Node(1)
 exampleTree.left=Node(2)
